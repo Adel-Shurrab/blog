@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Users\Tables;
+namespace App\Filament\Resources\Categories\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\RestoreAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class UsersTable
+class CategoriesTable
 {
     public static function configure(Table $table): Table
     {
@@ -25,11 +24,10 @@ class UsersTable
     {
         return [
             self::nameColumn(),
-            self::emailColumn(),
-            self::roleColumn(),
-            self::emailVerifiedAtColumn(),
+            self::slugColumn(),
             self::createdAtColumn(),
             self::updatedAtColumn(),
+            self::deletedAtColumn(),
         ];
     }
 
@@ -40,36 +38,11 @@ class UsersTable
             ->sortable();
     }
 
-    private static function emailColumn(): TextColumn
+    private static function slugColumn(): TextColumn
     {
-        return TextColumn::make('email')
-            ->label('Email Address')
+        return TextColumn::make('slug')
             ->searchable()
             ->sortable();
-    }
-
-    private static function roleColumn(): TextColumn
-    {
-        return TextColumn::make('role')
-            ->label('Role')
-            ->formatStateUsing(fn(string $state) => ucfirst($state))
-            ->badge()
-            ->color(fn(string $state) => match ($state) {
-                'admin' => 'danger',
-                'editor' => 'warning',
-                'author' => 'info',
-                default => 'gray',
-            })
-            ->searchable();
-    }
-
-    private static function emailVerifiedAtColumn(): TextColumn
-    {
-        return TextColumn::make('email_verified_at')
-            ->label('Email Verified At')
-            ->dateTime()
-            ->sortable()
-            ->toggleable(isToggledHiddenByDefault: true);
     }
 
     private static function createdAtColumn(): TextColumn
@@ -90,18 +63,28 @@ class UsersTable
             ->toggleable(isToggledHiddenByDefault: true);
     }
 
+    private static function deletedAtColumn(): TextColumn
+    {
+        return TextColumn::make('deleted_at')
+            ->label('Deleted At')
+            ->dateTime()
+            ->sortable()
+            ->toggleable(isToggledHiddenByDefault: true);
+    }
+
     private static function getFilters(): array
     {
         return [
             //
         ];
     }
+
     private static function getRecordActions(): array
     {
         return [
             EditAction::make(),
             DeleteAction::make(),
-            RestoreAction::make(),
+            Res
         ];
     }
 

@@ -3,10 +3,8 @@
 namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\RestoreAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -96,12 +94,12 @@ class UsersTable
             //
         ];
     }
+
     private static function getRecordActions(): array
     {
         return [
-            EditAction::make(),
-            DeleteAction::make(),
-            RestoreAction::make(),
+            EditAction::make()
+            ,
         ];
     }
 
@@ -110,7 +108,7 @@ class UsersTable
         return [
             BulkActionGroup::make([
                 DeleteBulkAction::make(),
-            ])->label('Actions'),
+            ]),
         ];
     }
 }
