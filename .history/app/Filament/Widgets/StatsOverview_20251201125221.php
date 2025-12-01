@@ -29,7 +29,7 @@ class StatsOverview extends StatsOverviewWidget
             ->descriptionIcon('heroicon-o-calendar')
             ->color('primary')
             ->url(route('filament.admin.resources.posts.index'))
-            ->chart([1,3,5,7,9,8,6,4,2,0]);
+            ->chart(self::getPostsChartData());
     }
 
     private static function categoriesCard(): Stat
@@ -60,5 +60,24 @@ class StatsOverview extends StatsOverviewWidget
             ->descriptionIcon('heroicon-o-chat-bubble-bottom-center-text')
             ->color('warning')
             ->url(route('filament.admin.resources.comments.index'));
+    }
+
+    private static function getPostsChartData(): array
+    {
+        return [
+            'type' => 'bar',
+            'data' => [
+                'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'datasets' => [
+                    [
+                        'label' => 'Posts Created',
+                        'data' => [5, 10, 8, 12, 15, 20, 18, 22, 25, 30, 28, 35],
+                        'backgroundColor' => 'rgba(59, 130, 246, 0.7)',
+                        'borderColor' => 'rgba(59, 130, 246, 1)',
+                        'borderWidth' => 1,
+                    ],
+                ],
+            ],
+        ];
     }
 }

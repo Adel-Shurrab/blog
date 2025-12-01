@@ -29,7 +29,7 @@ class StatsOverview extends StatsOverviewWidget
             ->descriptionIcon('heroicon-o-calendar')
             ->color('primary')
             ->url(route('filament.admin.resources.posts.index'))
-            ->chart([1,3,5,7,9,8,6,4,2,0]);
+            ->chart([1,3,5,3]);
     }
 
     private static function categoriesCard(): Stat
