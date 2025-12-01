@@ -23,7 +23,7 @@ class CommentResource extends Resource
     protected static ?string $model = Comment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ChatBubbleBottomCenterText;
-    protected static string | UnitEnum | null $navigationGroup = 'User Management';
+    protected static string | UnitEnum | null $navigationGroup = 'Content Management';
     protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
