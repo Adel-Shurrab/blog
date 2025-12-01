@@ -95,6 +95,7 @@ class UsersTable
     {
         return [
             self::roleFilter(),
+            self::emailVerifiedFilter(),
         ];
     }
     private static function getRecordActions(): array
@@ -124,5 +125,24 @@ class UsersTable
                 'editor' => 'Editor',
                 'author' => 'Author',
             ]);
+    }
+
+    private static function emailVerifiedFilter(): SelectFilter
+    {
+        return SelectFilter::make('email_verified_at')
+            ->label('Email Verification')
+            ->options([
+                'verified' => 'Verified',
+                'not_verified' => 'Not Verified',
+            ])
+            ->query(function ($query, $state) {
+                if ($state === 'verified') {
+                    return $query->whereNotNull('email_verified_at');
+                }
+                if ($state === 'not_verified') {
+                    return $query->whereNull('email_verified_at');
+                }
+                return $query;
+            });
     }
 }

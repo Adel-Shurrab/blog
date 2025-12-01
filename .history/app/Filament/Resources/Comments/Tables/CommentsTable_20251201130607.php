@@ -25,8 +25,7 @@ class CommentsTable
                 self::createdAtColumn(),
             ])
             ->filters([
-                self::statusFilter(),
-                self::userFilter(),
+                //
             ])
             ->recordActions([
                 EditAction::make(),
@@ -99,26 +98,5 @@ class CommentsTable
             })
             ->formatStateUsing(fn(string $state) => ucfirst($state))
             ->sortable();
-    }
-
-    private static function statusFilter(): SelectFilter
-    {
-        return SelectFilter::make('status')
-            ->label('Filter by Status')
-            ->options([
-                'pending' => 'Pending',
-                'approved' => 'Approved',
-                'rejected' => 'Rejected',
-            ])
-            ->attribute('status');
-    }
-
-    private static function userFilter(): SelectFilter
-    {
-        return SelectFilter::make('user_id')
-            ->label('Filter by User')
-            ->relationship('user', 'name')
-            ->searchable()
-            ->preload();
     }
 }

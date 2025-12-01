@@ -95,6 +95,7 @@ class UsersTable
     {
         return [
             self::roleFilter(),
+            self::emailVerifiedFilter(),
         ];
     }
     private static function getRecordActions(): array

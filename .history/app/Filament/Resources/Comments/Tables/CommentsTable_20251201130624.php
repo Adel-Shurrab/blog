@@ -118,7 +118,6 @@ class CommentsTable
         return SelectFilter::make('user_id')
             ->label('Filter by User')
             ->relationship('user', 'name')
-            ->searchable()
-            ->preload();
+            ->searchable();
     }
 }

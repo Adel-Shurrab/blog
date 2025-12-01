@@ -95,6 +95,7 @@ class UsersTable
     {
         return [
             self::roleFilter(),
+            self::emailVerifiedFilter(),
         ];
     }
     private static function getRecordActions(): array
@@ -113,16 +114,5 @@ class UsersTable
                 DeleteBulkAction::make(),
             ])->label('Actions'),
         ];
-    }
-
-    private static function roleFilter(): SelectFilter
-    {
-        return SelectFilter::make('role')
-            ->label('Filter by Role')
-            ->options([
-                'admin' => 'Admin',
-                'editor' => 'Editor',
-                'author' => 'Author',
-            ]);
     }
 }
