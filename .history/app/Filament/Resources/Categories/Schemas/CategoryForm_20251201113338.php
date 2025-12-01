@@ -23,7 +23,7 @@ class CategoryForm
             ->label('Name')
             ->required()
             ->live(onBlur: true)
-            ->afterStateUpdated(fn(callable $set, $state) => $set('slug', Str::slug($state)));
+            ->afterStateUpdated(fn (callable $set, $state) => $set('slug', Str::slug($state)));
     }
 
     private static function slugField(): TextInput
