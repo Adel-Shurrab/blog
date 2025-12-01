@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Filament\Resources\Categories\RelationManagers;
+
+use App\Filament\Resources\Posts\PostResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Table;
+use Filament\Forms;
+use App\Models\Category;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+
+class PostsRelationManager extends RelationManager
+{
+    protected static string $relationship = 'posts';
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->recordTitleAttribute('title')
+                
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make('Post Details')
+                    ->description('Configure your post content and metadata.')
+                    ->schema([
+                        TextInput::make('title')
+                            ->label('Title')
+                            ->minLength(4)
+                            ->maxLength(30)
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder('Enter post title'),
+                        TextInput::make('slug')
+                            ->label('Slug')
+                            ->unique(ignoreRecord: true)
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder('URL-friendly title')
+                            ->hint('Leave blank to auto-generate from title'),
+                        ColorPicker::make('color')
+                            ->label('Post Color')
+                            ->required(),
+                        MarkdownEditor::make('content')
+                            ->label('Content')
+                            ->default(null)
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpan(1)->collapsible(),
+
+                Group::make()->schema([
+                    Section::make('Media & Publishing')
+                        ->description('Upload thumbnail and configure publishing options.')
+                        ->schema([
+                            FileUpload::make('thumbnail')
+                                ->label('Thumbnail')
+                                ->disk('public')
+                                ->directory('thumbnails')
+                                ->image()
+                                ->imageResizeMode('cover')
+                                ->imageCropAspectRatio('16:9')
+                                ->maxSize(5120)
+                                ->placeholder('Upload a thumbnail image'),
+                        ])->collapsible(),
+                    TagsInput::make('tags')
+                        ->label('Tags')
+                        ->required()
+                        ->placeholder('Add tags separated by commas'),
+                    Checkbox::make('published')
+                        ->label('Publish')
+                        ->default(false)
+                        ->columnSpan(1),
+                ]),
+
+            ]);
+    }
+}
