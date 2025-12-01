@@ -92,7 +92,7 @@ class CategoriesTable
         return [
             BulkActionGroup::make([
                 DeleteBulkAction::make(),
-            ])->label('Actions'),
+            ]),
         ];
     }
 }

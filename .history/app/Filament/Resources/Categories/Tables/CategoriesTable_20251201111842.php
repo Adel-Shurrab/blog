@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Categories\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -83,7 +82,7 @@ class CategoriesTable
     {
         return [
             EditAction::make(),
-            DeleteAction::make(),
+            De
         ];
     }
 
@@ -92,7 +91,7 @@ class CategoriesTable
         return [
             BulkActionGroup::make([
                 DeleteBulkAction::make(),
-            ])->label('Actions'),
+            ]),
         ];
     }
 }
