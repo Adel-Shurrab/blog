@@ -45,13 +45,4 @@ class UserExporter extends Exporter
 
         return $body;
     }
-
-    public static function getCompletedNotification(Export $export): ?Notification
-    {
-        return Notification::make()
-            ->title('User Export')
-            ->body(self::getCompletedNotificationBody($export))
-            ->success()
-            ->send();
-    }
 }

@@ -6,7 +6,6 @@ use App\Models\User;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
-use Filament\Notifications\Notification;
 use Illuminate\Support\Number;
 
 class UserExporter extends Exporter
@@ -44,14 +43,5 @@ class UserExporter extends Exporter
         }
 
         return $body;
-    }
-
-    public static function getCompletedNotification(Export $export): ?Notification
-    {
-        return Notification::make()
-            ->title('User Export')
-            ->body(self::getCompletedNotificationBody($export))
-            ->success()
-            ->send();
     }
 }

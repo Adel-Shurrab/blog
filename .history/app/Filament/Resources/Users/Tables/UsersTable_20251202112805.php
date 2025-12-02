@@ -124,6 +124,7 @@ class UsersTable
                 ->exporter(UserExporter::class)
                 ->formats([
                     ExportFormat::Csv,
+
                 ]),
         ];
     }

@@ -13,7 +13,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Filament\Actions\ExportBulkAction;
-use Filament\Actions\Exports\Enums\ExportFormat;
 
 class UsersTable
 {
@@ -123,7 +122,9 @@ class UsersTable
             ExportBulkAction::make()
                 ->exporter(UserExporter::class)
                 ->formats([
-                    ExportFormat::Csv,
+                    'csv',
+                    'xlsx',
+                    'pdf',
                 ]),
         ];
     }
