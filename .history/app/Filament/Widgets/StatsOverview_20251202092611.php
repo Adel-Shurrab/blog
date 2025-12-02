@@ -60,18 +60,14 @@ class StatsOverview extends StatsOverviewWidget
         $count = User::count();
         $adminCount = User::where('role', 'admin')->count();
         $adminPercent = $count > 0 ? round(($adminCount / $count) * 100) : 0;
-        $thisMonthCount = User::whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->count();
-        $trend = $thisMonthCount > 0 ? "+{$thisMonthCount}" : '0';
 
         return Stat::make('Users', number_format($count))
             ->label('Total Users')
-            ->description("{$adminCount} admin(s) ({$adminPercent}%) — {$trend} this month")
+            ->description("{$adminCount} admin(s) ({$adminPercent}%)")
             ->descriptionIcon('heroicon-o-users')
             ->color('success')
             ->url(route('filament.admin.resources.users.index'))
-            ->chart(self::getUserTrend());
+            ->chart(self::generateChart($count));
     }
 
     private static function commentsCard(): Stat
@@ -79,77 +75,26 @@ class StatsOverview extends StatsOverviewWidget
         $count = Comment::count();
         $pendingCount = Comment::where('status', 'pending')->count();
         $pendingPercent = $count > 0 ? round(($pendingCount / $count) * 100) : 0;
-        $approvedCount = Comment::where('status', 'approved')->count();
 
         return Stat::make('Comments', number_format($count))
             ->label('Total Comments')
-            ->description("{$approvedCount} approved, {$pendingCount} pending ({$pendingPercent}%)")
+            ->description("{$pendingCount} pending ({$pendingPercent}%)")
             ->descriptionIcon('heroicon-o-chat-bubble-bottom-center-text')
             ->color('warning')
             ->url(route('filament.admin.resources.comments.index'))
-            ->chart(self::getCommentTrend());
+            ->chart(self::generateChart($count));
     }
 
     /**
-     * Get posts trend for the last 10 months
+     * Generate chart data for stats cards
      */
-    private static function getPostTrend(): array
+    private static function generateChart(int $count): array
     {
+        // Simulate a trend chart with random but smooth data
+        $base = max(1, $count - 5);
         $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Post::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get categories trend for the last 10 months
-     */
-    private static function getCategoryTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Category::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get users trend for the last 10 months
-     */
-    private static function getUserTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = User::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get comments trend for the last 10 months
-     */
-    private static function getCommentTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Comment::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = $base + rand(0, 5);
         }
         return $data;
     }

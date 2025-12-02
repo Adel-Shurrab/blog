@@ -153,4 +153,18 @@ class StatsOverview extends StatsOverviewWidget
         }
         return $data;
     }
+
+    /**
+     * Generate chart data for stats cards
+     */
+    private static function generateChart(int $count): array
+    {
+        // Simulate a trend chart with random but smooth data
+        $base = max(1, $count - 5);
+        $data = [];
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = $base + rand(0, 5);
+        }
+        return $data;
+    }
 }

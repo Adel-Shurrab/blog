@@ -153,4 +153,4 @@ class StatsOverview extends StatsOverviewWidget
         }
         return $data;
     }
-}
+

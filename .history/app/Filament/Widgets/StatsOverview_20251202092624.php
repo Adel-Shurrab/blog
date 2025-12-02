@@ -91,65 +91,15 @@ class StatsOverview extends StatsOverviewWidget
     }
 
     /**
-     * Get posts trend for the last 10 months
+     * Generate chart data for stats cards
      */
-    private static function getPostTrend(): array
+    private static function generateChart(int $count): array
     {
+        // Simulate a trend chart with random but smooth data
+        $base = max(1, $count - 5);
         $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Post::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get categories trend for the last 10 months
-     */
-    private static function getCategoryTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Category::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get users trend for the last 10 months
-     */
-    private static function getUserTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = User::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
-        }
-        return $data;
-    }
-
-    /**
-     * Get comments trend for the last 10 months
-     */
-    private static function getCommentTrend(): array
-    {
-        $data = [];
-        for ($i = 9; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $count = Comment::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count();
-            $data[] = $count;
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = $base + rand(0, 5);
         }
         return $data;
     }
