@@ -15,13 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // 1. Create one specific Admin user for YOU to log in with
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'role' => User::ROLE_ADMIN,
         ]);
 
+        // 2. Create 20 random users with mixed roles
         User::factory(20)->create();
         
+        // You can also call other seeders here if you made them
+        // $this->call([
+        //     PostSeeder::class,
+        // ]);
     }
 }

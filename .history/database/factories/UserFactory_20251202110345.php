@@ -33,7 +33,7 @@ class UserFactory extends Factory
                 User::ROLE_EDITOR,
                 User::ROLE_AUTHOR
             ]),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('password'), // default password
             'remember_token' => Str::random(10),
         ];
     }
