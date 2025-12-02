@@ -7,7 +7,7 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\Posts\Widgets\PostOverview;
+use App\Filament\Widgets\StatsOverview; 
 
 class ListPosts extends ListRecords
 {
@@ -23,7 +23,7 @@ class ListPosts extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            PostOverview::class,
+            PostOverview::class, // Use the specific widget class here
         ];
     }
 

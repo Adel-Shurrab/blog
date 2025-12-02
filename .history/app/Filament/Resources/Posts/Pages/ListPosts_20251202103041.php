@@ -7,7 +7,6 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\Posts\Widgets\PostOverview;
 
 class ListPosts extends ListRecords
 {
@@ -20,10 +19,10 @@ class ListPosts extends ListRecords
         ];
     }
 
-    protected function getHeaderWidgets(): array
+    protected function getHeaderWi(): array
     {
         return [
-            PostOverview::class,
+            CreateAction::make(),
         ];
     }
 
@@ -33,10 +32,10 @@ class ListPosts extends ListRecords
             'all' => Tab::make('All posts')
                 ->badge($this->getResource()::getEloquentQuery()->count()),
             'published' => Tab::make('Published')
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('published', true))
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('published', true))
                 ->badge($this->getResource()::getEloquentQuery()->where('published', true)->count()),
             'drafts' => Tab::make('Drafts')
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('published', false))
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('published', false))
                 ->badge($this->getResource()::getEloquentQuery()->where('published', false)->count()),
         ];
     }

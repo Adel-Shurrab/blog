@@ -23,7 +23,7 @@ class ListPosts extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            PostOverview::class,
+            PostOverview::class, // Use the specific widget class here
         ];
     }
 

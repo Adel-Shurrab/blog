@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\Posts\Widgets\PostOverview;
+use App\Models\User;
 
 class ListPosts extends ListRecords
 {
@@ -22,9 +23,18 @@ class ListPosts extends ListRecords
 
     protected function getHeaderWidgets(): array
     {
-        return [
-            PostOverview::class,
-        ];
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        // Only return the widget if the user is Admin or Editor
+        if ($user->isAdmin() || $user->isEditor()) {
+            return [
+                PostOverview::class,
+            ];
+        }
+
+        // Otherwise return an empty array (no widgets)
+        return [];
     }
 
     public function getTabs(): array
