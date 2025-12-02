@@ -9,17 +9,17 @@ use App\Models\Post;
 
 class TestChartWidget extends ChartWidget
 {
-    protected ?string $heading = 'Posts Created This Month';
+    protected ?string $heading = 'Test Chart Widget';
 
     protected function getData(): array
     {
         // Example data generation using Flowframe Trend package
         $data = Trend::model(Post::class)
             ->between(
-                start: now()->subMonth(),
-                end: now(),
+                start: now()->startOfMonth(),
+                end: now()->endOfMonth(),
             )
-            ->perMonth()
+            ->per()
             ->count();
 
         return [

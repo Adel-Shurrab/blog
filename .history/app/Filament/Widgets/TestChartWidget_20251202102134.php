@@ -19,7 +19,7 @@ class TestChartWidget extends ChartWidget
                 start: now()->subMonth(),
                 end: now(),
             )
-            ->perMonth()
+            ->perDay()
             ->count();
 
         return [

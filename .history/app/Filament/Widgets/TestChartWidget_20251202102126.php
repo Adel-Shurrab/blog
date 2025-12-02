@@ -17,9 +17,9 @@ class TestChartWidget extends ChartWidget
         $data = Trend::model(Post::class)
             ->between(
                 start: now()->subMonth(),
-                end: now(),
+                end: now()->endOfMonth(),
             )
-            ->perMonth()
+            ->perDay()
             ->count();
 
         return [

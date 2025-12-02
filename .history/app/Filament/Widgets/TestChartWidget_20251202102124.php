@@ -16,10 +16,10 @@ class TestChartWidget extends ChartWidget
         // Example data generation using Flowframe Trend package
         $data = Trend::model(Post::class)
             ->between(
-                start: now()->subMonth(),
-                end: now(),
+                start: now()->subM(),
+                end: now()->endOfMonth(),
             )
-            ->perMonth()
+            ->perDay()
             ->count();
 
         return [
