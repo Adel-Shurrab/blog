@@ -120,7 +120,7 @@ class UsersTable
                 DeleteBulkAction::make(),
             ])->label('Actions'),
             ExportBulkAction::make()
-                ->exporter(UserExporter::class),
+                ->exporter(Use::class),
         ];
     }
 

@@ -12,7 +12,6 @@ use Filament\Actions\RestoreAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Filament\Actions\ExportBulkAction;
 
 class UsersTable
 {
@@ -120,7 +119,7 @@ class UsersTable
                 DeleteBulkAction::make(),
             ])->label('Actions'),
             ExportBulkAction::make()
-                ->exporter(UserExporter::class),
+                ->exporter(ProductExporter::class),
         ];
     }
 

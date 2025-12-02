@@ -2,17 +2,14 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
-use App\Filament\Exports\UserExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ExportAction;
 use Filament\Actions\RestoreAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Filament\Actions\ExportBulkAction;
 
 class UsersTable
 {
@@ -22,11 +19,7 @@ class UsersTable
             ->columns(self::getColumns())
             ->filters(self::getFilters())
             ->recordActions(self::getRecordActions())
-            ->toolbarActions(self::getToolbarActions())
-            ->headerActions([
-                ExportAction::make('export')
-                    ->exporter(UserExporter::class),
-            ]);
+            ->toolbarActions(self::getToolbarActions());
     }
 
     private static function getColumns(): array
@@ -110,6 +103,7 @@ class UsersTable
             EditAction::make(),
             DeleteAction::make(),
             RestoreAction::make(),
+            ExportAction::make(),
         ];
     }
 
@@ -119,8 +113,6 @@ class UsersTable
             BulkActionGroup::make([
                 DeleteBulkAction::make(),
             ])->label('Actions'),
-            ExportBulkAction::make()
-                ->exporter(UserExporter::class),
         ];
     }
 
