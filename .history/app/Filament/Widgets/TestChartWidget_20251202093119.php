@@ -21,6 +21,7 @@ class TestChartWidget extends ChartWidget
                     'borderWidth' => 1,
                 ],
             ],
+            
         ];
     }
 

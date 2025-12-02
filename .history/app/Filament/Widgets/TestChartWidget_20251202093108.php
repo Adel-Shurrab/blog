@@ -22,6 +22,7 @@ class TestChartWidget extends ChartWidget
                 ],
             ],
         ];
+        
     }
 
     protected function getType(): string
